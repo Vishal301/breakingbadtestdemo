@@ -3,11 +3,22 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import CustomText from './CustomText';
 import FastImage from 'react-native-fast-image';
-import {white} from '../config/colors';
+import {lightGreen, white} from '../config/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {setCharacterList} from '../redux/Actions/characterListAction';
 
 const CharacterBox = props => {
+  const dispatch = useDispatch();
   const {item, index} = props;
+  const {charactersList} = useSelector(state => state.charactersList);
+
+  const likeDislike = char_id => {
+    const index = charactersList.findIndex(item => item.char_id === char_id);
+    let newArray = charactersList;
+    newArray[index].isLiked = !newArray[index].isLiked;
+    dispatch(setCharacterList(Object.assign([], newArray)));
+  };
 
   return (
     <View key={index} style={styles.boxContainer}>
@@ -33,13 +44,12 @@ const CharacterBox = props => {
             style={styles.nickNameText}
           />
         </View>
-        <TouchableOpacity>
-          <Icon
-            name="favorite-border"
-            solid={false}
-            size={30}
-            color="#3D3D3D"
-          />
+        <TouchableOpacity onPress={() => likeDislike(item.char_id)}>
+          {item.isLiked ? (
+            <Icon name="favorite" size={30} color={lightGreen} />
+          ) : (
+            <Icon name="favorite-border" size={30} color="#3D3D3D" />
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -67,6 +77,7 @@ const styles = StyleSheet.create({
   },
   nameText: {
     color: white,
+    width: wp(40) - 30,
     fontWeight: '700',
     fontSize: 16,
   },

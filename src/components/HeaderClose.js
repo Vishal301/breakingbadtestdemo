@@ -1,15 +1,14 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {lightGreen} from '../config/colors';
 import NavigationService from '../navigationServices/NavigationService';
 
-const HeaderFavorite = props => {
+const HeaderClose = props => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => NavigationService.navigate('FavoriteScreen')}>
-      <Icon name="favorite" size={28} color={lightGreen} />
+      onPress={() => NavigationService.navigate('HomeScreen')}>
+      <Icon name="close" size={28} color={'#FFFFFF'} />
     </TouchableOpacity>
   );
 };
@@ -20,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderFavorite;
+export default HeaderClose;
