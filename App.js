@@ -13,6 +13,10 @@ import HomeScreen from './src/screens/Home/HomeScreen';
 import {themeBlack, white} from './src/config/colors';
 import HeaderTitle from './src/components/HeaderTitle';
 import HomeHeaderRight from './src/components/HomeHeaderRight';
+import SearchScreen from './src/screens/Search/SearchScreen';
+import NavigationService from './src/navigationServices/NavigationService';
+import {StatusBar, View} from 'react-native';
+import globalStyles from './src/config/globalStyles';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,20 +31,35 @@ const defaultHeaderOptions = {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{
-            ...defaultHeaderOptions,
-            headerTitle: '',
-            headerLeft: () => <HeaderTitle titleText="The Breaking bad" />,
-            headerRight: () => <HomeHeaderRight />,
-          }}
-          name="HomeScreen"
-          component={HomeScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={globalStyles.pageContainer}>
+      <StatusBar barStyle={'light-content'} />
+
+      <NavigationContainer
+        ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}>
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{
+              ...defaultHeaderOptions,
+              headerTitle: '',
+              headerLeft: () => <HeaderTitle titleText="The Breaking bad" />,
+              headerRight: () => <HomeHeaderRight />,
+            }}
+            name="HomeScreen"
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            options={{
+              ...defaultHeaderOptions,
+              headerTitle: '',
+            }}
+            name="SearchScreen"
+            component={SearchScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 };
 

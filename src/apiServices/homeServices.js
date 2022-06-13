@@ -7,3 +7,10 @@ export const fetchAllCharacters = () => {
     method: 'get',
   });
 };
+
+export const searchCharacters = (query) => {
+  return baseApiCall({
+    url: `${getAllCharacters}${query}`,
+    method: 'get',
+  });
+};
