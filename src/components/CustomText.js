@@ -3,11 +3,13 @@ import {StyleSheet, Text, View} from 'react-native';
 import {RobotoRegular} from '../config/fonts';
 
 const CustomText = props => {
-  const {text, style} = props;
+  const {text, style, numberOfLines} = props;
 
   return (
     <View>
-      <Text style={[styles.defaultText, style]}>{text}</Text>
+      <Text numberOfLines={numberOfLines} style={[styles.defaultText, style]}>
+        {text}
+      </Text>
     </View>
   );
 };
