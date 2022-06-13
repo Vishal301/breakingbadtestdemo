@@ -9,7 +9,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, SafeAreaView} from 'react-native';
 import CustomText from './src/components/CustomText';
-import { RobotoBold } from './src/config/fonts';
 
 const App = () => {
   return (
